@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>脳画像ナビ — リハに役立つ脳画像 改訂第2版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  touch-action: manipulation;
+}
+body {
+  background: #f0f4f8;
+  color: #1e293b;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --blue: #2563eb;
+  --blue-light: #dbeafe;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+  --teal: #0d9488;
+  --teal-light: #ccfbf1;
+  --orange: #ea580c;
+  --orange-light: #ffedd5;
+  --surface: #f0f4f8;
+  --white: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ===== HEADER ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding-top: var(--safe-top);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue);
+}
+.header-title svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.home-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: background 0.15s, color 0.15s;
+}
+.home-btn:active { background: var(--border); }
+.home-btn svg { width: 22px; height: 22px; }
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+  padding: 0 16px 8px;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: none;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.breadcrumb.visible { display: flex; }
+.breadcrumb span { white-space: nowrap; }
+.breadcrumb .sep { color: var(--border); }
+.breadcrumb .crumb-link {
+  color: var(--blue);
+  cursor: pointer;
+  text-decoration: none;
+}
+.breadcrumb .crumb-link:active { text-decoration: underline; }
+
+/* ===== SEARCH ===== */
+.search-wrap {
+  padding: 8px 16px 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.search-box {
+  position: relative;
+}
+.search-box svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 40px 0 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.search-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-clear {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.search-clear.visible { display: flex; }
+.search-clear:active { background: var(--surface); }
+.search-clear svg { width: 18px; height: 18px; }
+
+/* ===== MAIN CONTENT ===== */
+.main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 120px;
+}
+
+/* ===== NAV BUTTONS ===== */
+.nav-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: transform 0.1s, box-shadow 0.15s, border-color 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+.nav-btn:active {
+  transform: scale(0.98);
+  box-shadow: none;
+}
+.nav-btn .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.nav-btn .btn-text {
+  flex: 1;
+  min-width: 0;
+}
+.nav-btn .btn-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.nav-btn .btn-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+.nav-btn .arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* ===== SECTION HEADER ===== */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+}
+.section-header .icon-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===== CONTENT CARD ===== */
+.content-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.card-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.card-header .card-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.card-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.card-header .page-ref {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.card-header .page-ref span {
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.card-section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.card-section:last-child { border-bottom: none; }
+.card-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.card-section-title .label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.card-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.card-section li {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+.card-section li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+.card-section .vessel-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+/* ===== COLLAPSIBLE ===== */
+.collapsible-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.collapsible-toggle:last-of-type { border-bottom: none; }
+.collapsible-toggle .toggle-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.collapsible-toggle .toggle-title .label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.collapsible-toggle .chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.collapsible-toggle.open .chevron { transform: rotate(180deg); }
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.collapsible-content.open {
+  max-height: 2000px;
+}
+.collapsible-inner {
+  padding: 0 16px 14px;
+}
+.collapsible-inner ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.collapsible-inner li {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+.collapsible-inner li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+/* ===== RELATED LINKS ===== */
+.related-links {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+.related-links .rl-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.related-links .rl-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.related-links .rl-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--surface);
+  color: var(--blue);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.related-links .rl-chip:active {
+  background: var(--blue-light);
+}
+
+/* ===== SEARCH RESULTS ===== */
+.search-results {
+  display: none;
+}
+.search-results.visible { display: block; }
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.1s;
+}
+.search-result-item:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+.search-result-item:last-child { border-radius: 0 0 var(--radius) var(--radius); border-bottom: none; }
+.search-result-item:only-child { border-radius: var(--radius); }
+.search-result-item:active { background: var(--surface); }
+.search-result-item .sr-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.search-result-item .sr-text { flex: 1; min-width: 0; }
+.search-result-item .sr-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.search-result-item .sr-path {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.search-result-item .arrow {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.search-no-result {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue);
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+.back-btn:active { background: var(--blue-light); }
+.back-btn svg { width: 18px; height: 18px; }
+
+/* ===== VIEW TRANSITIONS ===== */
+.view { animation: fadeIn 0.2s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 10px 16px;
+  padding-bottom: calc(10px + var(--safe-bottom));
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  z-index: 50;
+}
+.footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.footer a:hover { color: var(--text-secondary); }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 0; }
+
+/* ===== UTILITIES ===== */
+.hidden { display: none !important; }
+
+/* ===== PAGE VIEWER BUTTON ===== */
+.page-viewer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  border: none;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.page-viewer-btn:active {
+  background: #1d4ed8;
+  transform: scale(0.98);
+}
+
+/* ===== IMAGE VIEWER MODAL ===== */
+.img-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #000;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.img-viewer-overlay.open {
+  display: flex;
+}
+body.viewer-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+}
+body.viewer-open .header,
+body.viewer-open .footer {
+  visibility: hidden;
+}
+
+/* Close button */
+.iv-close {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top, 12px));
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1010;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.iv-close:active { background: rgba(255,255,255,0.3); }
+
+/* Navigation arrows */
+.iv-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1010;
+  -webkit-tap-highlight-color: transparent;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.15s;
+}
+.iv-nav:active { background: rgba(255,255,255,0.3); }
+.iv-nav.prev { left: 8px; }
+.iv-nav.next { right: 8px; }
+.iv-nav:disabled { opacity: 0.3; pointer-events: none; }
+
+/* Image container */
+.iv-image-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+}
+.iv-image-area img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.05s linear;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Page indicator */
+.iv-indicator {
+  position: absolute;
+  bottom: max(20px, calc(env(safe-area-inset-bottom, 20px) + 8px));
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+  z-index: 1010;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-title">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 6C11.6 6 8 9.6 8 14c0 2.5 1.2 4.8 3 6.2V24a2 2 0 002 2h6a2 2 0 002-2v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z" fill="currentColor" opacity="0.15"/>
+        <path d="M13 26h6M14 28h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M16 6C11.6 6 8 9.6 8 14c0 2.5 1.2 4.8 3 6.2V24a2 2 0 002 2h6a2 2 0 002-2v-3.8c1.8-1.4 3-3.7 3-6.2 0-4.4-3.6-8-8-8z" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="16" y1="14" x2="16" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="13" y1="12" x2="13" y2="16" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <line x1="19" y1="12" x2="19" y2="16" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      脳画像ナビ
+    </div>
+    <button class="home-btn" onclick="goHome()" aria-label="ホームに戻る">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12l9-9 9 9"/><path d="M9 21V12h6v9"/>
+      </svg>
+    </button>
+  </div>
+  <div class="breadcrumb" id="breadcrumb"></div>
+</header>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" class="search-input" id="searchInput" placeholder="症状・血管・部位で検索…" autocomplete="off">
+    <button class="search-clear" id="searchClear" aria-label="検索をクリア">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main" id="app"></main>
+
+<!-- IMAGE VIEWER MODAL -->
+<div class="img-viewer-overlay" id="imgViewer">
+  <button class="iv-close" id="ivClose" aria-label="閉じる">✕</button>
+  <button class="iv-nav prev" id="ivPrev" aria-label="前のページ">‹</button>
+  <button class="iv-nav next" id="ivNext" aria-label="次のページ">›</button>
+  <div class="iv-image-area" id="ivImageArea">
+    <img id="ivImage" src="" alt="ページ画像">
+  </div>
+  <div class="iv-indicator" id="ivIndicator"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  出典：リハに役立つ脳画像 改訂第2版（大村優慈 著 / 酒向正春 編）<br>
+  <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+</footer>
+
+<script>
+// ===== DATA =====
+const COLORS = {
+  '脳梗塞': { color: '#2563eb', bg: '#dbeafe', icon: '🔵' },
+  '脳出血': { color: '#dc2626', bg: '#fee2e2', icon: '🔴' },
+  '認知症': { color: '#7c3aed', bg: '#ede9fe', icon: '🟣' },
+  '基礎':   { color: '#6b7280', bg: '#f3f4f6', icon: '⚪' },
+  '機能解剖': { color: '#0d9488', bg: '#ccfbf1', icon: '🟢' },
+  '頭部外傷': { color: '#ea580c', bg: '#ffedd5', icon: '🟠' }
+};
+
+// Navigation tree
+const NAV_TREE = {
+  id: 'root',
+  children: [
+    {
+      id: 'ischemic', label: '脳梗塞（虚血性）', sub: '血管領域別の画像所見', cat: '脳梗塞',
+      children: [
+        { id: 'aca', label: '前大脳動脈（ACA）領域', sub: 'p.122-129', cat: '脳梗塞', content: 'aca' },
+        { id: 'mca', label: '中大脳動脈（MCA）領域', sub: 'p.130-133', cat: '脳梗塞', content: 'mca' },
+        { id: 'pca', label: '後大脳動脈（PCA）領域', sub: 'p.134-138', cat: '脳梗塞', content: 'pca' },
+        { id: 'ica', label: '内頸動脈領域', sub: 'p.139-140', cat: '脳梗塞', content: 'ica' },
+        { id: 'perforator', label: '穿通枝動脈領域', sub: 'p.141-142', cat: '脳梗塞', content: 'perforator' },
+        { id: 'achoroidal', label: '前脈絡叢動脈領域', sub: 'p.143-144', cat: '脳梗塞', content: 'achoroidal' },
+        { id: 'infratentorial', label: 'テント下（椎骨・脳底動脈系）', sub: 'p.145-153', cat: '脳梗塞', content: 'infratentorial' },
+        { id: 'mechanism', label: '脳梗塞の発生機序', sub: 'p.118-121', cat: '脳梗塞', content: 'mechanism' },
+        { id: 'vessel_check', label: '血管の状態確認', sub: 'p.154-157', cat: '脳梗塞', content: 'vessel_check' }
+      ]
+    },
+    {
+      id: 'hemorrhagic', label: '脳出血（出血性）', sub: '出血部位別の画像所見', cat: '脳出血',
+      children: [
+        { id: 'putamen', label: '被殻出血', sub: 'p.164-167', cat: '脳出血', content: 'putamen' },
+        { id: 'thalamus', label: '視床出血', sub: 'p.168-170', cat: '脳出血', content: 'thalamus' },
+        { id: 'brainstem_h', label: '脳幹出血', sub: 'p.171-172', cat: '脳出血', content: 'brainstem_h' },
+        { id: 'cerebellum_h', label: '小脳出血', sub: 'p.173', cat: '脳出血', content: 'cerebellum_h' },
+        { id: 'subcortical_h', label: '皮質下出血', sub: 'p.174-175', cat: '脳出血', content: 'subcortical_h' },
+        { id: 'sah', label: 'くも膜下出血', sub: 'p.176-179', cat: '脳出血', content: 'sah' },
+        { id: 'ct_class', label: '血腫・CT分類・機能予後', sub: 'p.158-163', cat: '脳出血', content: 'ct_class' }
+      ]
+    },
+    {
+      id: 'dementia', label: '認知症・脳萎縮', sub: '各認知症の画像特徴', cat: '認知症',
+      children: [
+        { id: 'alzheimer', label: 'アルツハイマー型認知症', sub: 'p.102-103', cat: '認知症', content: 'alzheimer' },
+        { id: 'ftd', label: '前頭側頭型認知症', sub: 'p.104-105', cat: '認知症', content: 'ftd' },
+        { id: 'dlb', label: 'レビー小体型認知症', sub: 'p.106', cat: '認知症', content: 'dlb' },
+        { id: 'vad', label: '脳血管性認知症', sub: 'p.107-109', cat: '認知症', content: 'vad' },
+        { id: 'nph', label: '正常圧水頭症', sub: 'p.110-112', cat: '認知症', content: 'nph' },
+        { id: 'msa', label: '多系統萎縮症', sub: 'p.113-117', cat: '認知症', content: 'msa' }
+      ]
+    },
+    {
+      id: 'basics', label: '脳画像の基礎', sub: 'CT・MRIの読影基礎', cat: '基礎',
+      children: [
+        { id: 'ct_mri', label: '脳梗塞画像の基礎（CT・MRI）', sub: 'p.12-13', cat: '基礎', content: 'ct_mri' },
+        { id: 'temporal', label: '梗塞巣の経時的変化', sub: 'p.14-17', cat: '基礎', content: 'temporal' },
+        { id: 'hem_basics', label: '脳出血画像の基礎', sub: 'p.18-19', cat: '基礎', content: 'hem_basics' },
+        { id: 'baseline', label: '横断像の基準線', sub: 'p.20-21', cat: '基礎', content: 'baseline' },
+        { id: 'compression', label: '圧迫所見の評価', sub: 'p.22-27', cat: '基礎', content: 'compression' }
+      ]
+    },
+    {
+      id: 'anatomy', label: '脳の機能解剖', sub: '脳の構造と機能局在', cat: '機能解剖',
+      children: [
+        {
+          id: 'lobes', label: '脳葉・脳溝の同定', sub: '脳の基本構造', cat: '機能解剖',
+          children: [
+            { id: 'ventricle', label: '側脳室はランドマーク', sub: 'p.29-33', cat: '機能解剖', content: 'ventricle' },
+            { id: 'lobe_div', label: '脳葉の区分指標', sub: 'p.34', cat: '機能解剖', content: 'lobe_div' },
+            { id: 'lateral_sulcus', label: '外側溝の同定', sub: 'p.35', cat: '機能解剖', content: 'lateral_sulcus' },
+            { id: 'central_sulcus', label: '中心溝の同定', sub: 'p.36-37', cat: '機能解剖', content: 'central_sulcus' },
+            { id: 'po_sulcus', label: '頭頂後頭溝の同定', sub: 'p.38', cat: '機能解剖', content: 'po_sulcus' },
+            { id: 'pt_border', label: '頭頂葉と側頭葉の境界', sub: 'p.39-40', cat: '機能解剖', content: 'pt_border' }
+          ]
+        },
+        {
+          id: 'cortex', label: '大脳皮質の機能局在', sub: '運動野・感覚野・言語野', cat: '機能解剖',
+          children: [
+            { id: 'noshi3', label: '大脳皮質の構造「のし3丁」', sub: 'p.41-42', cat: '機能解剖', content: 'noshi3' },
+            { id: 'multiview', label: '脳の多方向からの観察', sub: 'p.43-44', cat: '機能解剖', content: 'multiview' },
+            { id: 'func_local', label: '機能局在の関係', sub: 'p.45-47', cat: '機能解剖', content: 'func_local' },
+            { id: 'frontal_gyri', label: '前頭葉の脳回同定', sub: 'p.48-49', cat: '機能解剖', content: 'frontal_gyri' },
+            { id: 'somatotopy', label: '錐体路と感覚伝導路の体部位局在', sub: 'p.50-52', cat: '機能解剖', content: 'somatotopy' },
+            { id: 'broca', label: 'Broca野の同定', sub: 'p.53', cat: '機能解剖', content: 'broca' },
+            { id: 'wernicke', label: 'Wernicke野の同定', sub: 'p.54', cat: '機能解剖', content: 'wernicke' },
+            { id: 'parietal', label: '頭頂葉の区分', sub: 'p.55', cat: '機能解剖', content: 'parietal' },
+            { id: 'smg_ag', label: '縁上回と角回', sub: 'p.56-57', cat: '機能解剖', content: 'smg_ag' },
+            { id: 'visual_cortex', label: '視覚野の同定', sub: 'p.58', cat: '機能解剖', content: 'visual_cortex' },
+            { id: 'visual_field', label: '視野と伝導路', sub: 'p.59-60', cat: '機能解剖', content: 'visual_field' },
+            { id: 'hippocampus', label: '海馬・扁桃体', sub: 'p.61', cat: '機能解剖', content: 'hippocampus' },
+            { id: 'temporal_ant', label: '側頭葉前部', sub: 'p.62', cat: '機能解剖', content: 'temporal_ant' }
+          ]
+        },
+        {
+          id: 'basal_ganglia', label: '大脳基底核・内包・視床', sub: '深部構造の同定', cat: '機能解剖',
+          children: [
+            { id: 'caudate', label: '尾状核の同定', sub: 'p.63', cat: '機能解剖', content: 'caudate' },
+            { id: 'lentiform', label: 'レンズ核の同定', sub: 'p.64-65', cat: '機能解剖', content: 'lentiform' },
+            { id: 'int_capsule', label: '内包の同定', sub: 'p.66-68', cat: '機能解剖', content: 'int_capsule' },
+            { id: 'thal_func', label: '視床の機能局在', sub: 'p.69-70', cat: '機能解剖', content: 'thal_func' }
+          ]
+        },
+        {
+          id: 'fibers', label: '脳梁・帯状回・上縦束', sub: '神経線維の走行', cat: '機能解剖',
+          children: [
+            { id: 'cc', label: '脳梁の同定', sub: 'p.71', cat: '機能解剖', content: 'cc' },
+            { id: 'cingulate', label: '帯状回の同定', sub: 'p.72', cat: '機能解剖', content: 'cingulate' },
+            { id: 'slf', label: '上縦束の同定', sub: 'p.73-74', cat: '機能解剖', content: 'slf' }
+          ]
+        },
+        {
+          id: 'brainstem_anat', label: '脳幹・小脳', sub: '脳幹各部と小脳の構造', cat: '機能解剖',
+          children: [
+            { id: 'cerebellum_a', label: '小脳の機能解剖', sub: 'p.75-79', cat: '機能解剖', content: 'cerebellum_a' },
+            { id: 'midbrain', label: '中脳の機能解剖', sub: 'p.80-82', cat: '機能解剖', content: 'midbrain' },
+            { id: 'pons', label: '橋の機能解剖', sub: 'p.83-86', cat: '機能解剖', content: 'pons' },
+            { id: 'medulla', label: '延髄の機能解剖', sub: 'p.87-88', cat: '機能解剖', content: 'medulla' }
+          ]
+        },
+        {
+          id: 'vessels', label: '脳血管の解剖', sub: '動脈支配領域', cat: '機能解剖',
+          children: [
+            { id: 'mra_read', label: 'MRAの見かた', sub: 'p.89-91', cat: '機能解剖', content: 'mra_read' },
+            { id: 'cortical_art', label: '大脳皮質の動脈支配', sub: 'p.92', cat: '機能解剖', content: 'cortical_art' },
+            { id: 'trunk_perf', label: '主幹動脈と穿通枝動脈', sub: 'p.93-94', cat: '機能解剖', content: 'trunk_perf' },
+            { id: 'axial_art', label: '横断像上の脳動脈支配領域', sub: 'p.95', cat: '機能解剖', content: 'axial_art' },
+            { id: 'art_variation', label: '脳動脈の支配領域の個人差', sub: 'p.96-99', cat: '機能解剖', content: 'art_variation' }
+          ]
+        }
+      ]
+    },
+    { id: 'trauma', label: '頭部外傷', sub: 'p.180-185', cat: '頭部外傷', content: 'trauma' }
+  ]
+};
+
+// Content data
+const CONTENT = {
+  mechanism: {
+    title: '脳梗塞の発生機序',
+    pages: 'p.118-121',
+    cat: '脳梗塞',
+    keypoints: [
+      'アテローム血栓性脳梗塞・心原性脳塞栓・ラクナ梗塞の3分類',
+      '塞栓は広範囲・血栓は比較的限局',
+      'BAD（branch atheromatous disease）の概念'
+    ],
+    reha: ['発生機序により病巣範囲が異なり予後予測に重要'],
+    related: ['perforator', 'vessel_check', 'ct_mri']
+  },
+  aca: {
+    title: '前大脳動脈（ACA）領域梗塞',
+    pages: 'p.122-129',
+    cat: '脳梗塞',
+    vessel: '前大脳動脈（ACA）',
+    symptoms: ['下肢優位の運動麻痺・感覚障害', '精神機能障害（自発性低下・無関心）', '排尿障害', '把握反射'],
+    keypoints: [
+      '運動野・感覚野の下肢領域（内側面）の損傷に着目',
+      '帯状回損傷で自発性低下',
+      '補足運動野損傷で運動企図の障害',
+      '脳梁損傷で左手の観念運動失行'
+    ],
+    reha: ['下肢の運動麻痺・感覚障害の評価', '自発性・意欲の評価が重要'],
+    related: ['mca', 'ica', 'somatotopy', 'cingulate']
+  },
+  mca: {
+    title: '中大脳動脈（MCA）領域梗塞',
+    pages: 'p.130-133',
+    cat: '脳梗塞',
+    vessel: '中大脳動脈（MCA）',
+    symptoms: ['上肢優位の片麻痺', '感覚障害', '同名半盲', '優位半球→失語', '劣位半球→半側空間無視・病態失認'],
+    keypoints: [
+      '放線冠の損傷に着目',
+      'MCA起始部閉塞では広範な梗塞',
+      '皮質枝閉塞では機能局在に応じた症状',
+      '放線冠での錐体路の体部位局在を理解する'
+    ],
+    reha: ['放線冠レベルでの錐体路損傷→上肢・手指の麻痺が重度になりやすい', '高次脳機能障害の評価必須'],
+    related: ['aca', 'pca', 'putamen', 'somatotopy', 'broca', 'wernicke']
+  },
+  pca: {
+    title: '後大脳動脈（PCA）領域梗塞',
+    pages: 'p.134-138',
+    cat: '脳梗塞',
+    vessel: '後大脳動脈（PCA）',
+    symptoms: ['同名半盲（後頭葉損傷）', '記憶障害（海馬損傷）', '視床症候群（視床損傷）', '中脳症状（Weber症候群など）'],
+    keypoints: [
+      '視床と中脳の損傷に着目',
+      '視床穿通動脈閉塞→意識障害・垂直注視麻痺',
+      '視床膝状体動脈閉塞→感覚障害・視床痛',
+      '後頭葉皮質の梗塞→視野欠損'
+    ],
+    reha: ['視野欠損・記憶障害の評価', '視床痛への対応'],
+    related: ['thalamus', 'visual_field', 'hippocampus', 'thal_func']
+  },
+  ica: {
+    title: '内頸動脈領域梗塞',
+    pages: 'p.139-140',
+    cat: '脳梗塞',
+    vessel: '内頸動脈（ICA）',
+    symptoms: ['分水嶺領域の梗塞', 'MCA+ACA領域の広範梗塞（閉塞部位による）'],
+    keypoints: [
+      '分水嶺領域の損傷に着目',
+      '前方分水嶺→上肢近位・肩の麻痺',
+      '後方分水嶺→視覚障害',
+      '内側分水嶺→下肢麻痺'
+    ],
+    reha: ['分水嶺梗塞の特徴的な症状パターンの理解'],
+    related: ['aca', 'mca', 'vessel_check']
+  },
+  perforator: {
+    title: '穿通枝動脈領域の梗塞',
+    pages: 'p.141-142',
+    cat: '脳梗塞',
+    vessel: 'レンズ核線条体動脈、視床穿通動脈など',
+    symptoms: ['ラクナ梗塞（純粋運動性片麻痺、純粋感覚性障害など）', 'BAD'],
+    keypoints: [
+      'ラクナ梗塞とBADの違いを知る',
+      'ラクナ梗塞は15mm以下の小梗塞',
+      'BADは穿通枝起始部の動脈硬化で進行性に増悪'
+    ],
+    reha: ['BADは発症後に症状が進行する可能性があり注意'],
+    related: ['mechanism', 'putamen', 'thalamus', 'trunk_perf']
+  },
+  achoroidal: {
+    title: '前脈絡叢動脈領域梗塞',
+    pages: 'p.143-144',
+    cat: '脳梗塞',
+    vessel: '前脈絡叢動脈',
+    symptoms: ['片麻痺', '感覚障害', '同名半盲', '高次脳機能障害（見逃しやすい）'],
+    keypoints: [
+      '内包後脚の損傷で重度の運動麻痺',
+      '外側膝状体損傷で同名半盲',
+      '高次脳機能障害を見逃さないように'
+    ],
+    reha: ['小さな梗塞でも重度の症状を呈する可能性', '高次脳機能評価を忘れずに'],
+    related: ['int_capsule', 'mca', 'visual_field']
+  },
+  infratentorial: {
+    title: 'テント下の脳梗塞',
+    pages: 'p.145-153',
+    cat: '脳梗塞',
+    vessel: '椎骨動脈、脳底動脈、上小脳動脈、前下小脳動脈、後下小脳動脈',
+    symptoms: ['Wallenberg症候群（延髄外側）', 'locked-in症候群（橋腹側）', '小脳失調', '脳神経症状', '交代性片麻痺'],
+    keypoints: [
+      '椎骨・脳底動脈系の解剖を理解',
+      '延髄内側症候群と外側症候群の違い',
+      '橋梗塞の上部と下部の違い'
+    ],
+    reha: ['嚥下障害の評価が重要', '小脳失調と運動麻痺の鑑別'],
+    related: ['medulla', 'pons', 'cerebellum_a', 'brainstem_h']
+  },
+  vessel_check: {
+    title: '血管の状態確認',
+    pages: 'p.154-157',
+    cat: '脳梗塞',
+    keypoints: [
+      'MRAの読影法',
+      '動脈硬化の評価',
+      '頸部MRAの重要性'
+    ],
+    reha: ['血管の状態から再発リスクを評価'],
+    related: ['mechanism', 'mra_read', 'ica']
+  },
+  putamen: {
+    title: '被殻出血',
+    pages: 'p.164-167',
+    cat: '脳出血',
+    vessel: 'レンズ核線条体動脈',
+    symptoms: ['片麻痺', '感覚障害', '同名半盲', '優位半球→失語', '劣位半球→半側空間無視'],
+    keypoints: [
+      '周囲の神経線維（内包・放線冠）の損傷に着目',
+      '血腫の内側進展→内包損傷→重度麻痺',
+      '外側進展→皮質症状',
+      'CT分類: Ⅰ~Ⅴ型で機能予後が異なる'
+    ],
+    reha: ['血腫の進展方向と内包損傷の程度が予後を決定'],
+    related: ['ct_class', 'lentiform', 'int_capsule', 'mca']
+  },
+  thalamus: {
+    title: '視床出血',
+    pages: 'p.168-170',
+    cat: '脳出血',
+    vessel: '視床膝状体動脈、視床穿通動脈',
+    symptoms: ['感覚障害', '視床痛', '意識障害（脳室穿破時）', '垂直注視麻痺', '記憶障害'],
+    keypoints: [
+      '視床亜核と周辺構造の損傷に着目',
+      '脳室穿破の有無が予後に影響',
+      '内包後脚への進展で運動麻痺'
+    ],
+    reha: ['感覚障害の詳細な評価', '視床痛への配慮', '高次脳機能障害の評価'],
+    related: ['thal_func', 'pca', 'int_capsule', 'perforator']
+  },
+  brainstem_h: {
+    title: '脳幹出血',
+    pages: 'p.171-172',
+    cat: '脳出血',
+    symptoms: ['四肢麻痺', '意識障害', '瞳孔縮小（pinpoint pupil）', '眼球運動障害', '呼吸障害'],
+    keypoints: [
+      '錐体路・横橋線維・脳神経核に着目',
+      '橋出血は重篤',
+      '被蓋部保存例は機能回復の可能性あり'
+    ],
+    reha: ['意識レベルと呼吸状態の管理が最優先'],
+    related: ['pons', 'infratentorial', 'compression']
+  },
+  cerebellum_h: {
+    title: '小脳出血',
+    pages: 'p.173',
+    cat: '脳出血',
+    symptoms: ['小脳失調（四肢・体幹）', 'めまい', '嘔気', '頭痛', '意識障害（脳幹圧迫時）'],
+    keypoints: [
+      '出血源による症状の違い',
+      '歯状核出血→四肢失調',
+      '虫部出血→体幹失調',
+      '脳幹圧迫→意識障害'
+    ],
+    reha: ['小脳失調の評価（指鼻試験・踵膝試験・体幹失調）'],
+    related: ['cerebellum_a', 'brainstem_h', 'compression']
+  },
+  subcortical_h: {
+    title: '皮質下出血',
+    pages: 'p.174-175',
+    cat: '脳出血',
+    symptoms: ['機能局在に応じた症状（運動麻痺、感覚障害、失語、視野障害など）'],
+    keypoints: [
+      '機能局在と神経線維をおさえる',
+      '皮質下出血は比較的若年にも多い（AVM、海綿状血管腫）'
+    ],
+    reha: ['出血部位の機能局在に基づく評価'],
+    related: ['func_local', 'putamen', 'mca']
+  },
+  sah: {
+    title: 'くも膜下出血',
+    pages: 'p.176-179',
+    cat: '脳出血',
+    symptoms: ['突然の激しい頭痛', '意識障害', '項部硬直'],
+    keypoints: [
+      '原因：脳動脈瘤破裂が多数',
+      '出血と合併症それぞれの症状を知る',
+      '脳血管攣縮（4-14日）→遅発性脳虚血',
+      '正常圧水頭症の合併'
+    ],
+    reha: ['脳血管攣縮期の安静度管理', '合併症に応じた段階的リハ'],
+    related: ['nph', 'compression', 'vessel_check']
+  },
+  ct_class: {
+    title: '血腫・CT分類・機能予後',
+    pages: 'p.158-163',
+    cat: '脳出血',
+    keypoints: [
+      '脳出血のCT画像の経時的変化',
+      '被殻出血のCT分類と機能予後の関係',
+      '血腫量の計算方法'
+    ],
+    reha: ['CT分類から機能予後を予測'],
+    related: ['putamen', 'hem_basics', 'thalamus']
+  },
+  alzheimer: {
+    title: 'アルツハイマー型認知症',
+    pages: 'p.102-103',
+    cat: '認知症',
+    symptoms: ['記銘力障害（近時記憶）', '見当識障害', '実行機能障害'],
+    keypoints: [
+      '海馬の萎縮に着目',
+      '側脳室下角の拡大',
+      '内側側頭葉の萎縮が特徴的'
+    ],
+    related: ['hippocampus', 'ftd', 'vad']
+  },
+  ftd: {
+    title: '前頭側頭型認知症',
+    pages: 'p.104-105',
+    cat: '認知症',
+    symptoms: ['人格変化', '脱抑制', '常同行動', '語義失語'],
+    keypoints: [
+      '海馬が保たれるのが特徴',
+      '前頭葉・側頭葉前部の限局性萎縮',
+      'ナイフの刃状萎縮'
+    ],
+    related: ['alzheimer', 'temporal_ant', 'frontal_gyri']
+  },
+  dlb: {
+    title: 'レビー小体型認知症',
+    pages: 'p.106',
+    cat: '認知症',
+    symptoms: ['認知機能の変動', '幻視', 'パーキンソニズム', 'REM睡眠行動異常'],
+    keypoints: [
+      'MRIでは特徴的所見に乏しい',
+      '海馬萎縮は軽度',
+      'MIBG心筋シンチグラフィ・DATスキャンが有用'
+    ],
+    related: ['alzheimer', 'msa']
+  },
+  vad: {
+    title: '脳血管性認知症',
+    pages: 'p.107-109',
+    cat: '認知症',
+    symptoms: ['まだら認知症', '歩行障害', '排尿障害'],
+    keypoints: [
+      '大脳白質病変に着目',
+      'ビンスワンガー型→広範な白質病変',
+      '多発梗塞型→多発性ラクナ梗塞'
+    ],
+    related: ['perforator', 'alzheimer', 'nph']
+  },
+  nph: {
+    title: '正常圧水頭症',
+    pages: 'p.110-112',
+    cat: '認知症',
+    symptoms: ['歩行障害・認知症・排尿障害の3徴'],
+    keypoints: [
+      '脳萎縮と水頭症の鑑別',
+      'DESH所見（脳室拡大+シルビウス裂拡大+高位円蓋部の脳溝狭小化）',
+      'tap testが有用'
+    ],
+    related: ['sah', 'vad', 'ventricle']
+  },
+  msa: {
+    title: '多系統萎縮症',
+    pages: 'p.113-117',
+    cat: '認知症',
+    symptoms: ['小脳失調', 'パーキンソニズム', '自律神経障害'],
+    keypoints: [
+      '脳幹・小脳の萎縮',
+      '十字サイン（hot cross bun sign）',
+      'スリットサイン（slit sign）',
+      'MSA-C型とMSA-P型'
+    ],
+    related: ['cerebellum_a', 'pons', 'dlb']
+  },
+  ct_mri: {
+    title: '脳画像の基礎（CT・MRI）',
+    pages: 'p.12-13',
+    cat: '基礎',
+    keypoints: [
+      'CT→出血の検出に優れる',
+      'MRI→梗塞の検出に優れる',
+      'DWI→急性期梗塞の早期検出',
+      'FLAIR→慢性期病変の検出',
+      'T1→解剖学的構造',
+      'T2→病変の検出'
+    ],
+    related: ['temporal', 'hem_basics', 'baseline']
+  },
+  temporal: {
+    title: '梗塞巣の経時的変化',
+    pages: 'p.14-17',
+    cat: '基礎',
+    keypoints: [
+      'ペナンブラの概念',
+      'fogging effect（2-3週で一時的にCT上梗塞巣が不明瞭化）',
+      'DWI→急性期に高信号'
+    ],
+    related: ['ct_mri', 'mechanism']
+  },
+  hem_basics: {
+    title: '脳出血画像の基礎',
+    pages: 'p.18-19',
+    cat: '基礎',
+    keypoints: [
+      'CT→急性期は高吸収域（白）',
+      '経時的変化（高吸収→等吸収→低吸収）'
+    ],
+    related: ['ct_mri', 'ct_class', 'putamen']
+  },
+  baseline: {
+    title: '横断像の基準線',
+    pages: 'p.20-21',
+    cat: '基礎',
+    keypoints: [
+      'OM line（orbitomeatal line）の理解',
+      'AC-PC lineの理解'
+    ],
+    related: ['ct_mri', 'ventricle']
+  },
+  compression: {
+    title: '圧迫所見の評価',
+    pages: 'p.22-27',
+    cat: '基礎',
+    keypoints: [
+      '正中偏位（midline shift）の評価',
+      '脳ヘルニアの種類と症状'
+    ],
+    related: ['putamen', 'brainstem_h', 'sah']
+  },
+  trauma: {
+    title: '頭部外傷',
+    pages: 'p.180-185',
+    cat: '頭部外傷',
+    symptoms: ['意識障害', '高次脳機能障害', '運動麻痺'],
+    keypoints: [
+      '急性硬膜下血腫・急性硬膜外血腫の鑑別',
+      'びまん性軸索損傷（DAI）',
+      '慢性硬膜下血腫'
+    ],
+    reha: ['高次脳機能障害の包括的評価'],
+    related: ['compression', 'ct_mri', 'func_local']
+  },
+  // 脳の機能解剖 sub-items
+  ventricle: {
+    title: '側脳室はランドマーク',
+    pages: 'p.29-33',
+    cat: '機能解剖',
+    keypoints: [
+      '側脳室の各部位（前角・体部・後角・下角）の同定',
+      '側脳室をランドマークとして周囲の構造を同定',
+      '横断像での側脳室の見え方の変化'
+    ],
+    related: ['lobe_div', 'caudate', 'baseline']
+  },
+  lobe_div: {
+    title: '脳葉の区分指標',
+    pages: 'p.34',
+    cat: '機能解剖',
+    keypoints: [
+      '前頭葉・頭頂葉・側頭葉・後頭葉の区分',
+      '中心溝・外側溝・頭頂後頭溝が主要な境界'
+    ],
+    related: ['central_sulcus', 'lateral_sulcus', 'po_sulcus']
+  },
+  lateral_sulcus: {
+    title: '外側溝の同定',
+    pages: 'p.35',
+    cat: '機能解剖',
+    keypoints: [
+      '外側溝（シルビウス裂）の横断像での同定法',
+      '前頭葉・頭頂葉と側頭葉の境界'
+    ],
+    related: ['lobe_div', 'central_sulcus', 'broca']
+  },
+  central_sulcus: {
+    title: '中心溝の同定',
+    pages: 'p.36-37',
+    cat: '機能解剖',
+    keypoints: [
+      '中心溝の横断像での同定法',
+      '逆Ω（omega）サインの活用',
+      '前頭葉（運動野）と頭頂葉（感覚野）の境界'
+    ],
+    related: ['lobe_div', 'somatotopy', 'frontal_gyri']
+  },
+  po_sulcus: {
+    title: '頭頂後頭溝の同定',
+    pages: 'p.38',
+    cat: '機能解剖',
+    keypoints: [
+      '頭頂後頭溝の横断像での同定法',
+      '頭頂葉と後頭葉の境界'
+    ],
+    related: ['lobe_div', 'visual_cortex']
+  },
+  pt_border: {
+    title: '頭頂葉と側頭葉の境界',
+    pages: 'p.39-40',
+    cat: '機能解剖',
+    keypoints: [
+      '横断像での頭頂葉と側頭葉の境界の同定',
+      '外側溝の後方部分の確認'
+    ],
+    related: ['lateral_sulcus', 'parietal', 'smg_ag']
+  },
+  noshi3: {
+    title: '大脳皮質の構造「のし3丁」',
+    pages: 'p.41-42',
+    cat: '機能解剖',
+    keypoints: [
+      '「のし3丁」の覚え方で皮質構造を理解',
+      '大脳の基本的な層構造'
+    ],
+    related: ['func_local', 'multiview']
+  },
+  multiview: {
+    title: '脳の多方向からの観察',
+    pages: 'p.43-44',
+    cat: '機能解剖',
+    keypoints: [
+      '外側面・内側面・下面からの脳の観察',
+      '各方向から見える構造の理解'
+    ],
+    related: ['noshi3', 'func_local', 'lobe_div']
+  },
+  func_local: {
+    title: '機能局在の関係',
+    pages: 'p.45-47',
+    cat: '機能解剖',
+    keypoints: [
+      'Brodmann野と機能局在の対応',
+      '運動野・感覚野・視覚野・聴覚野・言語野の位置',
+      '高次脳機能と皮質領域の関連'
+    ],
+    related: ['frontal_gyri', 'somatotopy', 'broca', 'wernicke', 'visual_cortex']
+  },
+  frontal_gyri: {
+    title: '前頭葉の脳回同定',
+    pages: 'p.48-49',
+    cat: '機能解剖',
+    keypoints: [
+      '上前頭回・中前頭回・下前頭回の同定',
+      '中心前回（一次運動野）の同定',
+      '前頭眼野・前頭前野の位置'
+    ],
+    related: ['central_sulcus', 'broca', 'somatotopy']
+  },
+  somatotopy: {
+    title: '錐体路と感覚伝導路の体部位局在',
+    pages: 'p.50-52',
+    cat: '機能解剖',
+    keypoints: [
+      '一次運動野・一次感覚野のホムンクルス',
+      '内包における錐体路の体部位局在',
+      '放線冠レベルでの体部位局在'
+    ],
+    related: ['central_sulcus', 'int_capsule', 'mca', 'aca']
+  },
+  broca: {
+    title: 'Broca野の同定',
+    pages: 'p.53',
+    cat: '機能解剖',
+    keypoints: [
+      'Broca野（運動性言語野）の位置：左下前頭回後部',
+      '横断像での同定法',
+      '損傷→Broca失語（運動性失語）'
+    ],
+    related: ['wernicke', 'frontal_gyri', 'mca', 'slf']
+  },
+  wernicke: {
+    title: 'Wernicke野の同定',
+    pages: 'p.54',
+    cat: '機能解剖',
+    keypoints: [
+      'Wernicke野（感覚性言語野）の位置：左上側頭回後部',
+      '横断像での同定法',
+      '損傷→Wernicke失語（感覚性失語）'
+    ],
+    related: ['broca', 'smg_ag', 'mca', 'slf']
+  },
+  parietal: {
+    title: '頭頂葉の区分',
+    pages: 'p.55',
+    cat: '機能解剖',
+    keypoints: [
+      '中心後回（一次感覚野）',
+      '上頭頂小葉・下頭頂小葉の区分',
+      '頭頂連合野の機能'
+    ],
+    related: ['smg_ag', 'somatotopy', 'pt_border']
+  },
+  smg_ag: {
+    title: '縁上回と角回',
+    pages: 'p.56-57',
+    cat: '機能解剖',
+    keypoints: [
+      '縁上回（下頭頂小葉前部）：観念運動失行に関連',
+      '角回（下頭頂小葉後部）：Gerstmann症候群に関連',
+      '優位半球損傷と劣位半球損傷の違い'
+    ],
+    related: ['parietal', 'wernicke', 'mca']
+  },
+  visual_cortex: {
+    title: '視覚野の同定',
+    pages: 'p.58',
+    cat: '機能解剖',
+    keypoints: [
+      '一次視覚野（V1）の位置：鳥距溝周囲',
+      '横断像での同定法'
+    ],
+    related: ['visual_field', 'po_sulcus', 'pca']
+  },
+  visual_field: {
+    title: '視野と伝導路',
+    pages: 'p.59-60',
+    cat: '機能解剖',
+    keypoints: [
+      '視覚伝導路（網膜→外側膝状体→視放線→視覚野）',
+      '損傷部位による視野欠損パターンの違い',
+      '同名半盲・四分盲の理解'
+    ],
+    related: ['visual_cortex', 'pca', 'achoroidal']
+  },
+  hippocampus: {
+    title: '海馬・扁桃体',
+    pages: 'p.61',
+    cat: '機能解剖',
+    keypoints: [
+      '海馬の位置：側脳室下角の内側',
+      '記憶の形成に重要',
+      '扁桃体：情動に関連'
+    ],
+    related: ['alzheimer', 'pca', 'temporal_ant']
+  },
+  temporal_ant: {
+    title: '側頭葉前部',
+    pages: 'p.62',
+    cat: '機能解剖',
+    keypoints: [
+      '側頭葉前部の同定',
+      '意味記憶・社会的認知に関連',
+      '損傷→語義失語・相貌失認'
+    ],
+    related: ['hippocampus', 'ftd', 'wernicke']
+  },
+  caudate: {
+    title: '尾状核の同定',
+    pages: 'p.63',
+    cat: '機能解剖',
+    keypoints: [
+      '尾状核頭部：側脳室前角の外側',
+      '尾状核体部・尾部の走行',
+      '前頭葉-皮質下回路に関与'
+    ],
+    related: ['ventricle', 'lentiform', 'int_capsule']
+  },
+  lentiform: {
+    title: 'レンズ核の同定',
+    pages: 'p.64-65',
+    cat: '機能解剖',
+    keypoints: [
+      'レンズ核＝被殻＋淡蒼球',
+      '被殻の外側と内側の構造',
+      '横断像での同定法'
+    ],
+    related: ['caudate', 'int_capsule', 'putamen']
+  },
+  int_capsule: {
+    title: '内包の同定',
+    pages: 'p.66-68',
+    cat: '機能解剖',
+    keypoints: [
+      '内包の前脚・膝部・後脚の区分',
+      '内包後脚に錐体路が走行',
+      '横断像での内包の同定法'
+    ],
+    related: ['somatotopy', 'lentiform', 'caudate', 'putamen', 'thalamus']
+  },
+  thal_func: {
+    title: '視床の機能局在',
+    pages: 'p.69-70',
+    cat: '機能解剖',
+    keypoints: [
+      '視床亜核（VA, VL, VPL, VPM, 枕核など）の機能',
+      '感覚中継核・運動中継核の理解',
+      '視床損傷の症候と亜核の関連'
+    ],
+    related: ['thalamus', 'pca', 'perforator']
+  },
+  cc: {
+    title: '脳梁の同定',
+    pages: 'p.71',
+    cat: '機能解剖',
+    keypoints: [
+      '脳梁の各部位（膝部・体部・膨大部）',
+      '左右の大脳半球を連絡する交連線維',
+      '損傷→離断症候群'
+    ],
+    related: ['cingulate', 'aca', 'slf']
+  },
+  cingulate: {
+    title: '帯状回の同定',
+    pages: 'p.72',
+    cat: '機能解剖',
+    keypoints: [
+      '帯状回の位置：脳梁の上方',
+      '意欲・情動・痛みの認知に関連',
+      '前帯状回の損傷→自発性低下'
+    ],
+    related: ['cc', 'aca', 'func_local']
+  },
+  slf: {
+    title: '上縦束の同定',
+    pages: 'p.73-74',
+    cat: '機能解剖',
+    keypoints: [
+      '上縦束（SLF）の走行：前頭葉-頭頂葉-側頭葉を連絡',
+      '弓状束：Broca野とWernicke野を結ぶ',
+      '損傷→伝導失語・半側空間無視'
+    ],
+    related: ['broca', 'wernicke', 'mca']
+  },
+  cerebellum_a: {
+    title: '小脳の機能解剖',
+    pages: 'p.75-79',
+    cat: '機能解剖',
+    keypoints: [
+      '小脳虫部（体幹の協調運動）',
+      '小脳半球（四肢の協調運動）',
+      '小脳脚（上・中・下）の線維連絡',
+      '深部小脳核（歯状核など）'
+    ],
+    related: ['cerebellum_h', 'pons', 'infratentorial']
+  },
+  midbrain: {
+    title: '中脳の機能解剖',
+    pages: 'p.80-82',
+    cat: '機能解剖',
+    keypoints: [
+      '大脳脚（錐体路）の位置',
+      '黒質・赤核の同定',
+      '動眼神経核（Ⅲ）',
+      'Weber症候群・Benedikt症候群'
+    ],
+    related: ['pons', 'pca', 'somatotopy']
+  },
+  pons: {
+    title: '橋の機能解剖',
+    pages: 'p.83-86',
+    cat: '機能解剖',
+    keypoints: [
+      '橋腹側部（錐体路・横橋線維）と被蓋部の区分',
+      '外転神経核（Ⅵ）・顔面神経核（Ⅶ）・三叉神経核（Ⅴ）',
+      '橋上部と橋下部の違い'
+    ],
+    related: ['midbrain', 'medulla', 'brainstem_h', 'infratentorial']
+  },
+  medulla: {
+    title: '延髄の機能解剖',
+    pages: 'p.87-88',
+    cat: '機能解剖',
+    keypoints: [
+      '延髄の内側（錐体）と外側の構造',
+      '舌下神経核（Ⅻ）・迷走神経核（Ⅹ）・疑核',
+      '延髄内側症候群と外側症候群（Wallenberg）'
+    ],
+    related: ['pons', 'infratentorial', 'cerebellum_a']
+  },
+  mra_read: {
+    title: 'MRAの見かた',
+    pages: 'p.89-91',
+    cat: '機能解剖',
+    keypoints: [
+      'MRA画像の基本的な読影法',
+      'Willis動脈輪の同定',
+      '主要血管の走行の確認'
+    ],
+    related: ['vessel_check', 'cortical_art', 'trunk_perf']
+  },
+  cortical_art: {
+    title: '大脳皮質の動脈支配',
+    pages: 'p.92',
+    cat: '機能解剖',
+    keypoints: [
+      'ACA・MCA・PCAの皮質枝の支配領域',
+      '各動脈の皮質上での分布'
+    ],
+    related: ['mra_read', 'axial_art', 'aca', 'mca', 'pca']
+  },
+  trunk_perf: {
+    title: '主幹動脈と穿通枝動脈',
+    pages: 'p.93-94',
+    cat: '機能解剖',
+    keypoints: [
+      '主幹動脈（ICA, MCA, ACA, PCA, BA）から分岐する穿通枝動脈',
+      'レンズ核線条体動脈・視床穿通動脈の走行',
+      '穿通枝動脈の臨床的重要性'
+    ],
+    related: ['perforator', 'mra_read', 'cortical_art']
+  },
+  axial_art: {
+    title: '横断像上の脳動脈支配領域',
+    pages: 'p.95',
+    cat: '機能解剖',
+    keypoints: [
+      '各横断像レベルでの動脈支配領域の色分け',
+      '梗塞巣と責任血管の対応の理解'
+    ],
+    related: ['cortical_art', 'art_variation', 'trunk_perf']
+  },
+  art_variation: {
+    title: '脳動脈の支配領域の個人差',
+    pages: 'p.96-99',
+    cat: '機能解剖',
+    keypoints: [
+      '動脈支配領域には個人差がある',
+      'ACA-MCA境界の変動',
+      'PCA-MCA境界の変動',
+      '臨床での支配領域推定時の注意点'
+    ],
+    related: ['axial_art', 'cortical_art', 'ica']
+  }
+};
+
+// ===== APP STATE =====
+let navPath = []; // Stack of node IDs
+let searchMode = false;
+
+// ===== HELPERS =====
+function findNode(id, node = NAV_TREE) {
+  if (node.id === id) return node;
+  if (node.children) {
+    for (const child of node.children) {
+      const found = findNode(id, child);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+function getColorForCat(cat) {
+  return COLORS[cat] || COLORS['基礎'];
+}
+
+function getAllContentNodes(node = NAV_TREE, path = []) {
+  let results = [];
+  if (node.content) {
+    results.push({ id: node.id, contentId: node.content, label: node.label, cat: node.cat, path: [...path] });
+  }
+  if (node.children) {
+    const newPath = node.id === 'root' ? path : [...path, node.label];
+    for (const child of node.children) {
+      results = results.concat(getAllContentNodes(child, newPath));
+    }
+  }
+  return results;
+}
+
+const allContentNodes = getAllContentNodes();
+
+// ===== SVG ICONS =====
+const ARROW_SVG = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+const BACK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+const CHEVRON_DOWN = '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>';
+
+// ===== RENDER =====
+const app = document.getElementById('app');
+const breadcrumb = document.getElementById('breadcrumb');
+const searchInput = document.getElementById('searchInput');
+const searchClear = document.getElementById('searchClear');
+
+function render() {
+  if (searchMode) return;
+  
+  const currentNode = navPath.length === 0 
+    ? NAV_TREE 
+    : findNode(navPath[navPath.length - 1]);
+  
+  if (!currentNode) { goHome(); return; }
+  
+  // If this node has content, show content
+  if (currentNode.content) {
+    renderContent(currentNode.content, currentNode.cat);
+    updateBreadcrumb();
+    return;
+  }
+  
+  // Otherwise show navigation
+  renderNav(currentNode);
+  updateBreadcrumb();
+}
+
+function renderNav(node) {
+  const children = node.children || [];
+  const isRoot = node.id === 'root';
+  
+  let html = '<div class="view">';
+  
+  if (!isRoot) {
+    html += `<button class="back-btn" onclick="goBack()">${BACK_SVG} 戻る</button>`;
+    const c = getColorForCat(node.cat);
+    html += `<div class="section-header">
+      <div class="icon-circle" style="background:${c.bg}; color:${c.color}; font-size:16px;">🧠</div>
+      <h2>${node.label}</h2>
+    </div>`;
+  }
+  
+  html += '<div class="nav-grid">';
+  
+  for (const child of children) {
+    const c = getColorForCat(child.cat);
+    const hasContent = !!child.content;
+    const hasChildren = !!(child.children && child.children.length);
+    html += `<button class="nav-btn" onclick="navigate('${child.id}')">
+      <div class="dot" style="background:${c.color}"></div>
+      <div class="btn-text">
+        <div class="btn-title">${child.label}</div>
+        ${child.sub ? `<div class="btn-sub">${child.sub}</div>` : ''}
+      </div>
+      ${ARROW_SVG}
+    </button>`;
+  }
+  
+  html += '</div></div>';
+  app.innerHTML = html;
+}
+
+function renderContent(contentId, cat) {
+  const data = CONTENT[contentId];
+  if (!data) { goBack(); return; }
+  
+  const c = getColorForCat(data.cat || cat);
+  
+  let html = '<div class="view">';
+  html += `<button class="back-btn" onclick="goBack()">${BACK_SVG} 戻る</button>`;
+  
+  html += '<div class="content-card">';
+  
+  // Header
+  html += `<div class="card-header">
+    <div class="card-badge" style="background:${c.bg}; color:${c.color}">${data.cat}</div>
+    <h3>${data.title}</h3>
+    <div class="page-ref">📖 書籍 <span>${data.pages}</span> を参照</div>
+    <button class="page-viewer-btn" onclick="openPageViewer('${data.pages}')">📖 ページを見る (${data.pages})</button>
+  </div>`;
+  
+  // Vessel (if exists)
+  if (data.vessel) {
+    html += `<div class="card-section">
+      <div class="card-section-title"><div class="label-dot" style="background:${c.color}"></div>責任血管</div>
+      <div class="vessel-tag">${data.vessel}</div>
+    </div>`;
+  }
+  
+  // Key points (always visible)
+  if (data.keypoints && data.keypoints.length) {
+    html += `<div class="card-section">
+      <div class="card-section-title"><div class="label-dot" style="background:${c.color}"></div>キーポイント</div>
+      <ul>${data.keypoints.map(k => `<li>${k}</li>`).join('')}</ul>
+    </div>`;
+  }
+  
+  // Symptoms (collapsible)
+  if (data.symptoms && data.symptoms.length) {
+    const sid = 'symp_' + contentId;
+    html += `<button class="collapsible-toggle" onclick="toggleCollapse('${sid}', this)">
+      <div class="toggle-title"><div class="label-dot" style="background:${c.color}"></div>主な症候</div>
+      ${CHEVRON_DOWN}
+    </button>
+    <div class="collapsible-content" id="${sid}">
+      <div class="collapsible-inner">
+        <ul>${data.symptoms.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+  }
+  
+  // Rehab points (collapsible)
+  if (data.reha && data.reha.length) {
+    const rid = 'reha_' + contentId;
+    html += `<button class="collapsible-toggle" onclick="toggleCollapse('${rid}', this)">
+      <div class="toggle-title"><div class="label-dot" style="background:#0d9488"></div>リハビリの着目点</div>
+      ${CHEVRON_DOWN}
+    </button>
+    <div class="collapsible-content" id="${rid}">
+      <div class="collapsible-inner">
+        <ul>${data.reha.map(r => `<li>${r}</li>`).join('')}</ul>
+      </div>
+    </div>`;
+  }
+  
+  // Related links
+  if (data.related && data.related.length) {
+    html += `<div class="related-links">
+      <div class="rl-title">関連セクション</div>
+      <div class="rl-list">
+        ${data.related.map(rid => {
+          const rData = CONTENT[rid];
+          if (!rData) return '';
+          const rc = getColorForCat(rData.cat);
+          return `<button class="rl-chip" onclick="navigateToContent('${rid}')" style="border-color:${rc.color}22; color:${rc.color}">${rData.title}</button>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+  
+  html += '</div></div>';
+  app.innerHTML = html;
+  
+  // Auto-expand symptoms and reha on load
+  setTimeout(() => {
+    if (data.symptoms && data.symptoms.length) {
+      const sEl = document.getElementById('symp_' + contentId);
+      const sBtn = sEl?.previousElementSibling;
+      if (sEl && sBtn) { sEl.classList.add('open'); sBtn.classList.add('open'); }
+    }
+    if (data.reha && data.reha.length) {
+      const rEl = document.getElementById('reha_' + contentId);
+      const rBtn = rEl?.previousElementSibling;
+      if (rEl && rBtn) { rEl.classList.add('open'); rBtn.classList.add('open'); }
+    }
+  }, 50);
+}
+
+function updateBreadcrumb() {
+  if (navPath.length === 0) {
+    breadcrumb.classList.remove('visible');
+    breadcrumb.innerHTML = '';
+    return;
+  }
+  
+  breadcrumb.classList.add('visible');
+  let crumbs = [];
+  for (let i = 0; i < navPath.length; i++) {
+    const node = findNode(navPath[i]);
+    if (!node) continue;
+    const label = node.label.length > 12 ? node.label.substring(0, 12) + '…' : node.label;
+    if (i < navPath.length - 1) {
+      crumbs.push(`<span class="crumb-link" onclick="navigateTo(${i})">${label}</span>`);
+    } else {
+      crumbs.push(`<span>${label}</span>`);
+    }
+  }
+  breadcrumb.innerHTML = crumbs.join('<span class="sep">›</span>');
+}
+
+// ===== NAVIGATION =====
+function navigate(id) {
+  navPath.push(id);
+  searchMode = false;
+  searchInput.value = '';
+  searchClear.classList.remove('visible');
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function navigateTo(index) {
+  navPath = navPath.slice(0, index + 1);
+  searchMode = false;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function navigateToContent(contentId) {
+  // Find the node with this content and build path
+  const found = findContentPath(contentId, NAV_TREE, []);
+  if (found) {
+    navPath = found;
+    searchMode = false;
+    searchInput.value = '';
+    searchClear.classList.remove('visible');
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function findContentPath(contentId, node, path) {
+  if (node.content === contentId) {
+    return [...path, node.id];
+  }
+  if (node.children) {
+    const newPath = node.id === 'root' ? path : [...path, node.id];
+    for (const child of node.children) {
+      const found = findContentPath(contentId, child, newPath);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+function goBack() {
+  if (navPath.length > 0) {
+    navPath.pop();
+  }
+  searchMode = false;
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goHome() {
+  navPath = [];
+  searchMode = false;
+  searchInput.value = '';
+  searchClear.classList.remove('visible');
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== SEARCH =====
+function performSearch(query) {
+  if (!query.trim()) {
+    searchMode = false;
+    render();
+    return;
+  }
+  
+  searchMode = true;
+  const q = query.toLowerCase();
+  const results = [];
+  
+  for (const node of allContentNodes) {
+    const data = CONTENT[node.contentId];
+    if (!data) continue;
+    
+    // Search in title, symptoms, vessel, keypoints, reha
+    const searchText = [
+      data.title || '',
+      (data.symptoms || []).join(' '),
+      data.vessel || '',
+      (data.keypoints || []).join(' '),
+      (data.reha || []).join(' '),
+      data.cat || '',
+      node.label || ''
+    ].join(' ').toLowerCase();
+    
+    if (searchText.includes(q)) {
+      results.push({ node, data });
+    }
+  }
+  
+  renderSearchResults(results, query);
+}
+
+function renderSearchResults(results, query) {
+  let html = '<div class="view">';
+  
+  if (results.length === 0) {
+    html += `<div class="search-no-result">「${query}」に一致する項目がありません</div>`;
+  } else {
+    html += `<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">${results.length}件の結果</div>`;
+    html += '<div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm);">';
+    for (const { node, data } of results) {
+      const c = getColorForCat(data.cat);
+      const pathStr = node.path.length > 0 ? node.path.join(' › ') + ' › ' + data.pages : data.pages;
+      html += `<button class="search-result-item" onclick="navigateToContent('${node.contentId}')">
+        <div class="sr-dot" style="background:${c.color}"></div>
+        <div class="sr-text">
+          <div class="sr-title">${data.title}</div>
+          <div class="sr-path">${pathStr}</div>
+        </div>
+        ${ARROW_SVG}
+      </button>`;
+    }
+    html += '</div>';
+  }
+  
+  html += '</div>';
+  app.innerHTML = html;
+}
+
+// ===== COLLAPSIBLE =====
+function toggleCollapse(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+// ===== EVENT LISTENERS =====
+let searchTimeout;
+searchInput.addEventListener('input', (e) => {
+  const val = e.target.value;
+  searchClear.classList.toggle('visible', val.length > 0);
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => performSearch(val), 200);
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchClear.classList.remove('visible');
+  searchMode = false;
+  render();
+});
+
+// ===== IMAGE VIEWER =====
+const imgViewer = document.getElementById('imgViewer');
+const ivImage = document.getElementById('ivImage');
+const ivIndicator = document.getElementById('ivIndicator');
+const ivClose = document.getElementById('ivClose');
+const ivPrev = document.getElementById('ivPrev');
+const ivNext = document.getElementById('ivNext');
+const ivImageArea = document.getElementById('ivImageArea');
+
+let viewerPages = [];      // array of page numbers
+let viewerIndex = 0;       // current index
+let viewerScrollY = 0;     // stored scroll position
+
+// Zoom & Pan state
+let ivScale = 1;
+let ivTransX = 0;
+let ivTransY = 0;
+let ivPinchStartDist = 0;
+let ivPinchStartScale = 1;
+let ivPanStartX = 0;
+let ivPanStartY = 0;
+let ivPanStartTX = 0;
+let ivPanStartTY = 0;
+let ivIsPanning = false;
+let ivIsPinching = false;
+
+// Swipe state
+let swipeStartX = 0;
+let swipeStartY = 0;
+let swipeDeltaX = 0;
+let swipeActive = false;
+
+function parsePageRange(pageStr) {
+  // Formats: "p.122-129", "p.173", "p.12-13"
+  const match = pageStr.match(/p\.(\d+)(?:-(\d+))?/);
+  if (!match) return [];
+  const start = parseInt(match[1], 10);
+  const end = match[2] ? parseInt(match[2], 10) : start;
+  const pages = [];
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+  return pages;
+}
+
+function pageToFile(num) {
+  return 'pages/p' + String(num).padStart(3, '0') + '.jpg';
+}
+
+function openPageViewer(pageStr) {
+  viewerPages = parsePageRange(pageStr);
+  if (viewerPages.length === 0) return;
+  viewerIndex = 0;
+  resetTransform();
+  showViewerPage();
+  viewerScrollY = window.scrollY;
+  document.body.classList.add('viewer-open');
+  document.body.style.top = -viewerScrollY + 'px';
+  imgViewer.classList.add('open');
+}
+
+function closePageViewer() {
+  imgViewer.classList.remove('open');
+  document.body.classList.remove('viewer-open');
+  document.body.style.top = '';
+  window.scrollTo(0, viewerScrollY);
+  ivImage.src = '';
+}
+
+function showViewerPage() {
+  const pageNum = viewerPages[viewerIndex];
+  ivImage.src = pageToFile(pageNum);
+  const total = viewerPages.length;
+  const pos = viewerIndex + 1;
+  ivIndicator.textContent = `p.${pageNum} / ${total}ページ中 ${pos}ページ目`;
+  ivPrev.disabled = viewerIndex <= 0;
+  ivNext.disabled = viewerIndex >= viewerPages.length - 1;
+  resetTransform();
+}
+
+function resetTransform() {
+  ivScale = 1;
+  ivTransX = 0;
+  ivTransY = 0;
+  applyTransform();
+}
+
+function applyTransform() {
+  ivImage.style.transform = `translate(${ivTransX}px, ${ivTransY}px) scale(${ivScale})`;
+}
+
+function clampPan() {
+  if (ivScale <= 1) {
+    ivTransX = 0;
+    ivTransY = 0;
+    return;
+  }
+  const rect = ivImageArea.getBoundingClientRect();
+  const imgW = ivImage.naturalWidth || rect.width;
+  const imgH = ivImage.naturalHeight || rect.height;
+  // Displayed size
+  const dispW = Math.min(imgW, rect.width);
+  const dispH = Math.min(imgH, rect.height);
+  const scaledW = dispW * ivScale;
+  const scaledH = dispH * ivScale;
+  const maxX = Math.max(0, (scaledW - rect.width) / 2);
+  const maxY = Math.max(0, (scaledH - rect.height) / 2);
+  ivTransX = Math.max(-maxX, Math.min(maxX, ivTransX));
+  ivTransY = Math.max(-maxY, Math.min(maxY, ivTransY));
+}
+
+// Close button
+ivClose.addEventListener('click', closePageViewer);
+
+// Nav buttons
+ivPrev.addEventListener('click', () => {
+  if (viewerIndex > 0) { viewerIndex--; showViewerPage(); }
+});
+ivNext.addEventListener('click', () => {
+  if (viewerIndex < viewerPages.length - 1) { viewerIndex++; showViewerPage(); }
+});
+
+// Keyboard
+document.addEventListener('keydown', (e) => {
+  if (!imgViewer.classList.contains('open')) return;
+  if (e.key === 'Escape') closePageViewer();
+  if (e.key === 'ArrowLeft' && viewerIndex > 0) { viewerIndex--; showViewerPage(); }
+  if (e.key === 'ArrowRight' && viewerIndex < viewerPages.length - 1) { viewerIndex++; showViewerPage(); }
+});
+
+// Touch events for swipe and pinch-to-zoom
+function getTouchDist(t1, t2) {
+  const dx = t1.clientX - t2.clientX;
+  const dy = t1.clientY - t2.clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+ivImageArea.addEventListener('touchstart', (e) => {
+  if (!imgViewer.classList.contains('open')) return;
+  
+  if (e.touches.length === 2) {
+    // Pinch start
+    ivIsPinching = true;
+    swipeActive = false;
+    ivPinchStartDist = getTouchDist(e.touches[0], e.touches[1]);
+    ivPinchStartScale = ivScale;
+    e.preventDefault();
+  } else if (e.touches.length === 1) {
+    if (ivScale > 1) {
+      // Pan mode
+      ivIsPanning = true;
+      swipeActive = false;
+      ivPanStartX = e.touches[0].clientX;
+      ivPanStartY = e.touches[0].clientY;
+      ivPanStartTX = ivTransX;
+      ivPanStartTY = ivTransY;
+    } else {
+      // Swipe mode
+      swipeActive = true;
+      ivIsPanning = false;
+      swipeStartX = e.touches[0].clientX;
+      swipeStartY = e.touches[0].clientY;
+      swipeDeltaX = 0;
+    }
+  }
+}, { passive: false });
+
+ivImageArea.addEventListener('touchmove', (e) => {
+  if (!imgViewer.classList.contains('open')) return;
+  
+  if (ivIsPinching && e.touches.length === 2) {
+    e.preventDefault();
+    const dist = getTouchDist(e.touches[0], e.touches[1]);
+    const newScale = ivPinchStartScale * (dist / ivPinchStartDist);
+    ivScale = Math.max(1, Math.min(5, newScale));
+    if (ivScale <= 1) {
+      ivTransX = 0;
+      ivTransY = 0;
+    }
+    applyTransform();
+  } else if (ivIsPanning && e.touches.length === 1) {
+    e.preventDefault();
+    const dx = e.touches[0].clientX - ivPanStartX;
+    const dy = e.touches[0].clientY - ivPanStartY;
+    ivTransX = ivPanStartTX + dx;
+    ivTransY = ivPanStartTY + dy;
+    clampPan();
+    applyTransform();
+  } else if (swipeActive && e.touches.length === 1) {
+    swipeDeltaX = e.touches[0].clientX - swipeStartX;
+    const deltaY = Math.abs(e.touches[0].clientY - swipeStartY);
+    // Only prevent default if horizontal swipe dominates
+    if (Math.abs(swipeDeltaX) > deltaY && Math.abs(swipeDeltaX) > 10) {
+      e.preventDefault();
+    }
+  }
+}, { passive: false });
+
+ivImageArea.addEventListener('touchend', (e) => {
+  if (!imgViewer.classList.contains('open')) return;
+  
+  if (ivIsPinching) {
+    ivIsPinching = false;
+    if (ivScale <= 1) resetTransform();
+    return;
+  }
+  
+  if (ivIsPanning) {
+    ivIsPanning = false;
+    clampPan();
+    applyTransform();
+    return;
+  }
+  
+  if (swipeActive) {
+    swipeActive = false;
+    const threshold = 50;
+    if (swipeDeltaX < -threshold && viewerIndex < viewerPages.length - 1) {
+      viewerIndex++;
+      showViewerPage();
+    } else if (swipeDeltaX > threshold && viewerIndex > 0) {
+      viewerIndex--;
+      showViewerPage();
+    }
+  }
+});
+
+// Double-tap to zoom
+let lastTapTime = 0;
+ivImageArea.addEventListener('click', (e) => {
+  if (!imgViewer.classList.contains('open')) return;
+  const now = Date.now();
+  if (now - lastTapTime < 300) {
+    // Double tap
+    if (ivScale > 1) {
+      resetTransform();
+    } else {
+      ivScale = 2.5;
+      // Zoom towards tap position
+      const rect = ivImageArea.getBoundingClientRect();
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      ivTransX = (cx - e.clientX) * (ivScale - 1) / ivScale;
+      ivTransY = (cy - e.clientY) * (ivScale - 1) / ivScale;
+      clampPan();
+      applyTransform();
+    }
+    lastTapTime = 0;
+  } else {
+    lastTapTime = now;
+  }
+});
+
+// Click overlay background to close (not on image or buttons)
+imgViewer.addEventListener('click', (e) => {
+  if (e.target === imgViewer) closePageViewer();
+});
+
+// ===== INIT =====
+render();
+</script>
+</body>
+</html>
